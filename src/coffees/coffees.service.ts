@@ -81,12 +81,12 @@ export class CoffeesService {
     if (!coffee) {
       throw new NotFoundException(`Coffee #${id} not found!`);
     }
-    await this.coffeeRepository.save(coffee);
+    return this.coffeeRepository.save(coffee);
   }
 
   async remove(id: number) {
     const coffee = await this.findOne(id);
-    await this.coffeeRepository.save(coffee);
+    await this.coffeeRepository.remove(coffee);
   }
 
   async recommendCoffee(coffee: Coffee) {
@@ -95,7 +95,7 @@ export class CoffeesService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      coffee.recommendations++;
+      // coffee.recommendations++;
 
       const recommendEvent = new Event();
       recommendEvent.name = 'recommend_coffee';

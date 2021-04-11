@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCoffeeDto {
@@ -14,4 +14,12 @@ export class CreateCoffeeDto {
   @ApiProperty({example: ['chocolate', 'vanilla']})
   @IsString({each: true})
   readonly flavors: string[];
+
+  // @ApiProperty({description: 'The description of the coffee'})
+  // @IsString()
+  // readonly description?: string;
+  //
+  // @ApiProperty({description: 'The number of recommendations of the coffee'})
+  // @IsNumber()
+  // readonly recommendations?: number;
 }
