@@ -42,7 +42,7 @@ export class CoffeesService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const coffee = await this.coffeeRepository.findOne(id, {
       relations: ['flavors']
     });
@@ -84,7 +84,7 @@ export class CoffeesService {
     await this.coffeeRepository.save(coffee);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     const coffee = await this.findOne(id);
     await this.coffeeRepository.save(coffee);
   }
