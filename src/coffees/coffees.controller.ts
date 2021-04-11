@@ -20,8 +20,10 @@ import { REQUEST } from '@nestjs/core';
 import { Public } from '../common/decorators/public.decorator';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import { Protocol } from '../common/decorators/protocols.decorator';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
 // @UsePipes(ValidationPipe)
+@ApiTags('coffees')
 @Controller('coffees')
 export class CoffeesController {
 
@@ -44,6 +46,8 @@ export class CoffeesController {
     return response.status(333).send('Returns all the coffee flavors');
   }
 
+  // @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.coffeeService.findOne(id);
